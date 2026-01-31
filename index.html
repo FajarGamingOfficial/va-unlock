@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Va!UNC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="star-container"></div>
+
+<div class="container">
+    <div class="form-card">
+        <div class="logo">Va!storaa<span>Unlock</span></div>
+        <h2>Create Your Link</h2>
+        <p>Isi form di bawah untuk membuat tautan kunci otomatis.</p>
+        
+        <div class="input-group">
+            <label><i class="fab fa-youtube"></i> YouTube URL</label>
+            <input type="url" id="ytInput" placeholder="https://youtube.com/@channelkamU">
+        </div>
+
+        <div class="input-group">
+            <label><i class="fab fa-instagram"></i> Instagram URL</label>
+            <input type="url" id="igInput" placeholder="https://instagram.com/userkamu">
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Destination Link (Target)</label>
+            <input type="url" id="destInput" placeholder="https://pastebin.com/xxx atau mediafire">
+        </div>
+
+        <button onclick="generateNow()" class="btn-gen">Generate Link</button>
+
+        <div id="resultArea" class="result-box d-none">
+            <p>Link Kamu Berhasil Dibuat:</p>
+            <div class="copy-wrapper">
+                <input type="text" id="outputLink" readonly>
+                <button onclick="copyLink()" id="btnCopy">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

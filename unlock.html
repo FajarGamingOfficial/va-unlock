@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Link - Premium Galaxy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Base Styling */
+        body { 
+            background-color: #0b0d17; 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- EFEK GALAXY --- */
+        .stars-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        /* --- MODERN TOAST (Tengah & Otomatis Hilang) --- */
+        .toast-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: none;
+        }
+
+        .modern-toast {
+            background: rgba(20, 20, 25, 0.95);
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(244, 63, 94, 0.1);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            min-width: 280px;
+            animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modern-toast i {
+            color: #f43f5e;
+            font-size: 35px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes toastOut {
+            from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 0; transform: translate(-50%, -40%) scale(0.8); }
+        }
+
+        /* --- CARD STYLING --- */
+        .card { 
+            background: rgba(20, 20, 25, 0.85); 
+            padding: 35px 30px; 
+            border-radius: 28px; 
+            width: 90%; 
+            max-width: 380px; 
+            text-align: center; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .profile-img {
+            width: 85px; height: 85px;
+            border-radius: 50%;
+            border: 3px solid #f43f5e;
+            padding: 3px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+            object-fit: cover;
+        }
+
+        .btn { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 16px 20px; margin-bottom: 12px; border-radius: 16px; 
+            text-decoration: none; color: white; font-weight: 600; 
+            transition: 0.3s; background: #1e1e26; border: 1px solid #333;
+        }
+
+        .btn:hover { background: #2a2a35; transform: translateY(-2px); }
+        .btn.loading { opacity: 0.6; pointer-events: none; }
+        .btn-yt i { color: #FF0000; }
+        .btn-ig i { color: #cf2896; }
+        
+        .btn-main { background: #333; color: #777; pointer-events: none; margin-top: 15px; justify-content: center; }
+        .btn-main.ready { background: #28a745; color: white; pointer-events: auto; box-shadow: 0 0 20px rgba(40, 167, 69, 0.3); }
+        
+        .progress-bar { width: 100%; height: 6px; background: #222; border-radius: 10px; margin-top: 8px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #f43f5e, #fb7185); transition: 0.5s; }
+        
+        .check-icon { display: none; color: #28a745; }
+        .spinner-mini { display: none; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div id="toastContainer" class="toast-container">
+    <div class="modern-toast">
+        <i class="fas fa-exclamation-circle"></i>
+        <p id="toastMessage">Tugas belum selesai!</p>
+    </div>
+</div>
+
+<div class="stars-container" id="stars"></div>
+
+<div class="card">
+    <div class="profile-section">
+        <img src="https://yt3.googleusercontent.com/7OY7HtleNSRGntA5OC_f0bVmrszGG7lIVVcam8mmmYwwwAlHPO7kylLCSnlCRN8ajHZKfasZu8w=s160-c-k-c0x00ffffff-no-rj" id="ytAvatar" class="profile-img" alt="Profile">
+        <h3 id="ytNameDisplay" style="margin: 0 0 20px 0;">Va!storaa</h3>
+    </div>
+
+    <h2 style="margin-bottom: 5px; font-size: 22px;">Selesaikan Tugas</h2>
+    <p style="color: #888; font-size: 14px; margin-bottom: 25px;">Klik tombol untuk membuka link</p>
+
+    <a href="#" id="ytBtn" target="_blank" class="btn btn-yt">
+        <span><i class="fab fa-youtube"></i> &nbsp; Subscribe YouTube</span>
+        <span id="ytIcon"><i class="fas fa-chevron-right"></i></span>
+        <i class="fas fa-circle-notch spinner-mini" id="ytLoad"></i>
+        <span class="check-icon" id="ytCheck"><i class="fas fa-check-circle"></i></span>
+    </a>
+
+    <a href="#" id="igBtn" target="_blank" class="btn btn-ig">
+        <span><i class="fab fa-instagram"></i> &nbsp; Follow Instagram</span>
+        <span id="igIcon"><i class="fas fa-chevron-right"></i></span>
+        <i class="fas fa-circle-notch spinner-mini" id="igLoad"></i>
+        <span class="check-icon" id="igCheck"><i class="fas fa-check-circle"></i></span>
+    </a>
+
+    <p id="progressText" style="font-size: 12px; color: #888; margin-top: 15px;">Progress Unlock: 0/2</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <a href="#" id="unlockBtn" class="btn btn-main">
+        <i class="fas fa-lock"></i> &nbsp; Unlock Link
+    </a>
+</div>
+
+<script>
+    // 1. Stars Generator
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 150; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = star.style.height = Math.random() * 3 + 'px';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+        starsContainer.appendChild(star);
+    }
+
+    // 2. Toast Logic
+    function showToast(msg) {
+        const container = document.getElementById('toastContainer');
+        document.getElementById('toastMessage').innerText = msg;
+        container.style.display = 'block';
+        container.style.animation = 'toastIn 0.4s forwards';
+        
+        setTimeout(() => {
+            container.style.animation = 'toastOut 0.4s forwards';
+            setTimeout(() => { container.style.display = 'none'; }, 400);
+        }, 3000);
+    }
+
+    // 3. Main System
+    const urlParams = new URLSearchParams(window.location.search);
+    const data = urlParams.get('data');
+
+    if (data) {
+        try {
+            const params = new URLSearchParams(atob(data));
+            document.getElementById('ytBtn').href = params.get('yt');
+            document.getElementById('igBtn').href = params.get('ig');
+            const destLink = params.get('dest');
+
+            let ytDone = false, igDone = false;
+
+            function setupVerify(btnId, iconId, loadId, checkId, finishVar) {
+                const btn = document.getElementById(btnId);
+                btn.onclick = () => {
+                    if (window[finishVar]) return;
+                    document.getElementById(iconId).style.display = 'none';
+                    document.getElementById(loadId).style.display = 'inline-block';
+                    btn.classList.add('loading');
+
+                    let startTime = Date.now();
+                    const checkInterval = setInterval(() => {
+                        if (!document.hidden) {
+                            let diff = (Date.now() - startTime) / 1000;
+                            if (diff >= 5) {
+                                clearInterval(checkInterval);
+                                window[finishVar] = true;
+                                document.getElementById(loadId).style.display = 'none';
+                                document.getElementById(checkId).style.display = 'inline';
+                                btn.classList.remove('loading');
+                                updateProgress();
+                            } else {
+                                clearInterval(checkInterval);
+                                showToast("Ups! Kamu terlalu cepat balik. Silahkan Subscribe/Follow dulu ya.");
+                                document.getElementById(loadId).style.display = 'none';
+                                document.getElementById(iconId).style.display = 'inline';
+                                btn.classList.remove('loading');
+                            }
+                        }
+                    }, 1000);
+                };
+            }
+
+            setupVerify('ytBtn', 'ytIcon', 'ytLoad', 'ytCheck', 'ytDone');
+            setupVerify('igBtn', 'igIcon', 'igLoad', 'igCheck', 'igDone');
+
+            function updateProgress() {
+                let count = (window.ytDone ? 1 : 0) + (window.igDone ? 1 : 0);
+                document.getElementById('progressFill').style.width = (count / 2) * 100 + '%';
+                document.getElementById('progressText').innerText = `Progress Unlock: ${count}/2`;
+
+                if (count === 2) {
+                    let sec = 5;
+                    const btnM = document.getElementById('unlockBtn');
+                    const t = setInterval(() => {
+                        btnM.innerHTML = `<i class="fas fa-spinner fa-spin"></i> &nbsp; Memverifikasi ${sec}s...`;
+                        if (sec-- <= 0) {
+                            clearInterval(t);
+                            btnM.classList.add('ready');
+                            btnM.href = destLink;
+                            btnM.innerHTML = `<i class="fas fa-lock-open"></i> &nbsp; Ambil Link Sekarang`;
+                        }
+                    }, 1000);
+                }
+            }
+        } catch (e) { console.error("Data error"); }
+    }
+</script>
+
+</body>
+</html>
