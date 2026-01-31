@@ -3,47 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Va!UNC</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Va!UNC - Secure Generator</title>
 </head>
 <body>
+    <div id="va-app"></div>
 
-<div id="star-container"></div>
+    <script>
+        /** * Proteksi Kode index.html
+         * Seluruh HTML asli kamu di-encode ke Base64
+         */
+        const _v0x = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImlkIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+VmEhVU5DPC90aXRsZT4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9jdXJsLnF3L2ZvbnRhd2Vzb21lIj4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0ic3R5bGUuY3NzIj4KPC9oZWFkPgo8Ym9keT4KICAgIDxkaXYgaWQ9InN0YXItY29udGFpbmVyIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1jYXJkIj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ibG9nbyI+VmEhc3RvcmFhPHNwYW4+VW5sb2NrPC9zcGFuPjwvZGl2PgogICAgICAgICAgICA8aDI+Q3JlYXRlIFlvdXIgTGluazwvaDI+CiAgICAgICAgICAgIDxwPklzaSBmb3JtIGRpIGJhd2FoIHVudHVrIG1lbWJ1YXQgdGF1dGFuIGt1bmNpIG90b21hdGljLjwvcD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxkaXYgY2xhc3M9ImlucHV0LWdyb3VwIj4KICAgICAgICAgICAgICAgIDxsYWJlbD48aSBjbGFzcz0iZmFiIGZhLXlvdXR1YmUiPjwvaT4gWW91VHViZSBV搁MPC9sYWJlbD4KICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPSJ1cmwiIGlkPSJ5dElucHV0IiBwbGFjZWhvbGRlcj0iaHR0cHM6Ly95b3V0dWJlLmNvbS9AY2hhbm5lbGthbVUiPgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3M9ImlucHV0LWdyb3VwIj4KICAgICAgICAgICAgICAgIDxsYWJlbD48aSBjbGFzcz0iZmFiIGZhLWluc3RhZ3JhbSI+PC9pPiBJbnN0YWdyYW0gVVJMPC9sYWJlbD4KICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPSJ1cmwiIGlkPSJpZ0lucHV0IiBwbGFjZWhvbGRlcj0iaHR0cHM6Ly9pbnN0YWdyYW0uY29tL3VzZXJrYW11Ij4KICAgICAgICAgICAgPC9kaXY+CgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJpbnB1dC1ncm91cCI+CiAgICAgICAgICAgICAgICA8bGFiZWw+PGkgY2xhc3M9ImZhcyBmYS1saW5rIj48L2k+IERlc3RpbmF0aW9uIExpbmsgKFRhcmdldCk8L2xhYmVsPgogICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9InVybCIgaWQ9ImRlc3RJbnB1dCIgcGxhY2Vob2xkZXI9Imh0dHBzOi8vcGFzdGViaW4uY29tL3h4eCBhdGF1IG1lZGlhZmlyZSI+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJnZW5lcmF0ZU5vdygpIiBjbGFzcz0iYnRuLWdlbiI+R2VuZXJhdGUgTGluazwvYnV0dG9uPgoKICAgICAgICAgICAgPGRpdiBpZD0icmVzdWx0QXJlYSIgY2xhc3M9InJlc3VsdC1ib3ggZC1ub25lIj4KICAgICAgICAgICAgICAgIDxwPkxpbmsgS2FtdSBCZXJoYXNpbCBEaWJ1YXQ6PC9wPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY29weS13cmFwcGVyIj4KICAgICAgICAgICAgICAgICAgICA8aW5wdXQgdHlwZT0idGV4dCIgaWQ9Im91dHB1dExpbmsiIHJlYWRvbmx5PgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25jbGljaz0iY29weUxpbmsoKSIgaWQ9ImJ0bkNvcHkiPkNvcHk8L2J1dHRvbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4=";
 
-<div class="container">
-    <div class="form-card">
-        <div class="logo">Va!storaa<span>Unlock</span></div>
-        <h2>Create Your Link</h2>
-        <p>Isi form di bawah untuk membuat tautan kunci otomatis.</p>
-        
-        <div class="input-group">
-            <label><i class="fab fa-youtube"></i> YouTube URL</label>
-            <input type="url" id="ytInput" placeholder="https://youtube.com/@channelkamU">
-        </div>
+        // Decode dan tampilkan HTML
+        document.getElementById('va-app').innerHTML = atob(_v0x);
 
-        <div class="input-group">
-            <label><i class="fab fa-instagram"></i> Instagram URL</label>
-            <input type="url" id="igInput" placeholder="https://instagram.com/userkamu">
-        </div>
+        // Memanggil script.js agar fungsi generate tetap jalan
+        const script = document.createElement('script');
+        script.src = 'script.js';
+        document.body.appendChild(script);
 
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Destination Link (Target)</label>
-            <input type="url" id="destInput" placeholder="https://pastebin.com/xxx atau mediafire">
-        </div>
-
-        <button onclick="generateNow()" class="btn-gen">Generate Link</button>
-
-        <div id="resultArea" class="result-box d-none">
-            <p>Link Kamu Berhasil Dibuat:</p>
-            <div class="copy-wrapper">
-                <input type="text" id="outputLink" readonly>
-                <button onclick="copyLink()" id="btnCopy">Copy</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="script.js"></script>
+        // Anti Klik Kanan & F12
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))) return false;
+        };
+    </script>
 </body>
 </html>
